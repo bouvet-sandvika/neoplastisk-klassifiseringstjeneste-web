@@ -1,21 +1,110 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<div class="main">
+  <div class="logo-title-container">
+    <img width="100" alt="Angular Logo" src="assets/breast-cancer-logo.png">
+    <h1>
+      {{ title }}
+    </h1>
+  </div>
+    <div class="container">
+      <div class="body-main">
+        <div class="row">
+          <div class="label-wrapper">
+              <div class="label">
+                  <fa-icon icon="check-circle" size="2x" [styles]="{'stroke': '#00cc66', 'color': '#00cc66'}"></fa-icon> <span style="padding-left: 3px; font-size: 1.4em">Godartet</span>
+              </div>
+              <div class="label">
+                  <fa-icon icon="times-circle" size="2x" [styles]="{'stroke': '#ff3300', 'color': '#ff3300'}"></fa-icon> <span style="padding-left: 3px; font-size: 1.4em">Ondartet</span>
+              </div>
+          </div>
+            
+        </div>
+    </div>
+    <div class="pasient-table-wrapper">
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table table-hover">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Pasient ID</th>
+                  <th scope="col">Alder</th>
+                  <th scope="col">Kommune</th>
+                  <th>Valg</th>
+                  <th><fa-icon icon="robot"></fa-icon> AI</th>
+                  <th><fa-icon icon="user-md"></fa-icon> Biopsi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>43</td>
+                  <td>Trondheim</td>
+                  <td>
+                      <button type="button" class="table-btn btn btn-sm btn-outline-primary" (click)="viewTumorData(1)">Vis detaljer</button>
+                      <button type="button" class="table-btn btn btn-sm btn-outline-primary" (click)="predict(1)">Kjør analyse</button>
+                      <button type="button" class="table-btn btn btn-sm btn-outline-success" (click)="biopsi(1)">Hent biopsi</button>
+                  </td>
+                  <td><fa-icon icon="minus-circle" size="2x" [styles]="{'stroke': '#686869', 'color': '#686869'}"></fa-icon></td>
+                  <td><fa-icon icon="minus-circle" size="2x" [styles]="{'stroke': '#686869', 'color': '#686869'}"></fa-icon></td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>67</td>
+                  <td>Oslo</td>
+                  <td>
+                      <button type="button" class="table-btn btn btn-sm btn-outline-primary" (click)="viewTumorData(2)">Vis detaljer</button>
+                      <button type="button" class="table-btn btn btn-sm btn-outline-primary" (click)="predict(2)">Kjør analyse</button>
+                      <button type="button" class="table-btn btn btn-sm btn-outline-success" (click)="biopsi(2)">Hent biopsi</button>
+                  </td>
+                  <td><fa-icon icon="minus-circle" size="2x" [styles]="{'stroke': '#686869', 'color': '#686869'}"></fa-icon></td>
+                  <td><fa-icon icon="minus-circle" size="2x" [styles]="{'stroke': '#686869', 'color': '#686869'}"></fa-icon></td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>56</td>
+                  <td>Kristansand</td>
+                  <td>
+                      <button type="button" class="table-btn btn btn-sm btn-outline-primary" (click)="viewTumorData(3)">Vis detaljer</button>
+                      <button type="button" class="table-btn btn btn-sm btn-outline-primary" (click)="predict(3)">Kjør analyse</button>
+                      <button type="button" class="table-btn btn btn-sm btn-outline-success" (click)="biopsi(3)">Hent biopsi</button>
+                  </td>
+                  <td><fa-icon icon="minus-circle" size="2x" [styles]="{'stroke': '#686869', 'color': '#686869'}"></fa-icon></td>
+                  <td><fa-icon icon="minus-circle" size="2x" [styles]="{'stroke': '#686869', 'color': '#686869'}"></fa-icon></td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>32</td>
+                  <td>Vennesla</td>
+                  <td>
+                    <div class="button-group">
+                        <button type="button" class="table-btn btn btn-sm btn-outline-primary" (click)="viewTumorData(4)">Vis detaljer</button>
+                        <button type="button" class="table-btn btn btn-sm btn-outline-primary" (click)="predict(4)">Kjør analyse</button>
+                        <button type="button" class="table-btn btn btn-sm btn-outline-success" (click)="biopsi(4)">Hent biopsi</button>
+                    </div>
+                  </td>
+                  <td><fa-icon icon="minus-circle" size="2x" [styles]="{'stroke': '#686869', 'color': '#686869'}"></fa-icon></td>
+                  <td><fa-icon icon="minus-circle" size="2x" [styles]="{'stroke': '#686869', 'color': '#686869'}"></fa-icon></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>61</td>
+                    <td>Tromsø</td>
+                    <td>
+                      <div class="button-group">
+                          <button type="button" class="table-btn btn btn-sm btn-outline-primary" (click)="viewTumorData(5)">Vis detaljer</button>
+                          <button type="button" class="table-btn btn btn-sm btn-outline-primary" (click)="predict(5)">Kjør analyse</button>
+                          <button type="button" class="table-btn btn btn-sm btn-outline-success" (click)="biopsi(5)">Hent biopsi</button>
+                      </div>
+                    </td>
+                    <td><fa-icon icon="minus-circle" size="2x" [styles]="{'stroke': '#686869', 'color': '#686869'}"></fa-icon></td>
+                    <td><fa-icon icon="minus-circle" size="2x" [styles]="{'stroke': '#686869', 'color': '#686869'}"></fa-icon></td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+    </div>
+  </div>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
 
 <router-outlet></router-outlet>

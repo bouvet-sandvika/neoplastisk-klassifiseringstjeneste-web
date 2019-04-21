@@ -1,0 +1,28 @@
+.main {
+    margin-top: 3%;
+    
+}
+
+.body-main {
+    margin-top: 5%;
+}
+
+.logo-title-container {
+    text-align: center;
+}
+
+.pasient-table-wrapper {
+    margin-top: 2%;
+    width: 100%;
+}
+
+button.table-btn {
+    margin-left: 3px;
+}
+
+.label-wrapper {
+    display: inline-flex;
+    justify-content: space-between;
+    width: 30%;
+    margin-left: 35%;
+}
