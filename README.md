@@ -3,7 +3,6 @@
 
 ## breast-tumor-classifier
 Nevralt nettverk som identifiserer godartedet eller ondartede svulster i brystvev hos kvinner. 
->>>>>>> d116172487da93514fd63813054459716efe8b48
 
 ## Development server
 

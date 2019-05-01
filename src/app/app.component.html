@@ -14,7 +14,7 @@
                   <fa-icon icon="check-circle" size="2x" [styles]="{'stroke': '#00cc66', 'color': '#00cc66'}"></fa-icon> <span style="padding-left: 3px; font-size: 1.4em">Godartet</span>
               </div>
               <div class="label">
-                  <fa-icon icon="times-circle" size="2x" [styles]="{'stroke': '#ff3300', 'color': '#ff3300'}"></fa-icon> <span style="padding-left: 3px; font-size: 1.4em">Ondartet</span>
+                  <fa-icon icon="exclamation-triangle" size="2x" [styles]="{'stroke': '#ff3300', 'color': '#ff3300'}"></fa-icon> <span style="padding-left: 3px; font-size: 1.4em">Ondartet</span>
               </div>
           </div>
             
@@ -29,76 +29,54 @@
                   <th scope="col">Pasient ID</th>
                   <th scope="col">Alder</th>
                   <th scope="col">Kommune</th>
-                  <th>Valg</th>
+                  <th scope="col">Detaljer</th>
+                  <th scope="col">Valg</th>
+                  <th scope="col">Valg2</th>
                   <th><fa-icon icon="robot"></fa-icon> AI</th>
                   <th><fa-icon icon="user-md"></fa-icon> Biopsi</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody *ngFor="let pasient of pasients">
                 <tr>
-                  <td>1</td>
-                  <td>43</td>
-                  <td>Trondheim</td>
+                  <td>{{pasient.id}}</td>
+                  <td>{{pasient.alder}}</td>
+                  <td>{{pasient.kommune}}</td>
                   <td>
-                      <button type="button" class="table-btn btn btn-sm btn-outline-primary" (click)="viewTumorData(1)">Vis detaljer</button>
-                      <button type="button" class="table-btn btn btn-sm btn-outline-primary" (click)="predict(1)">Kjør analyse</button>
-                      <button type="button" class="table-btn btn btn-sm btn-outline-success" (click)="biopsi(1)">Hent biopsi</button>
+                      <button type="button" class="table-btn btn btn-sm btn-outline-primary" (click)="viewTumorData(pasient.id)">Vis detaljer</button>
                   </td>
-                  <td><fa-icon icon="minus-circle" size="2x" [styles]="{'stroke': '#686869', 'color': '#686869'}"></fa-icon></td>
-                  <td><fa-icon icon="minus-circle" size="2x" [styles]="{'stroke': '#686869', 'color': '#686869'}"></fa-icon></td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>67</td>
-                  <td>Oslo</td>
                   <td>
-                      <button type="button" class="table-btn btn btn-sm btn-outline-primary" (click)="viewTumorData(2)">Vis detaljer</button>
-                      <button type="button" class="table-btn btn btn-sm btn-outline-primary" (click)="predict(2)">Kjør analyse</button>
-                      <button type="button" class="table-btn btn btn-sm btn-outline-success" (click)="biopsi(2)">Hent biopsi</button>
-                  </td>
-                  <td><fa-icon icon="minus-circle" size="2x" [styles]="{'stroke': '#686869', 'color': '#686869'}"></fa-icon></td>
-                  <td><fa-icon icon="minus-circle" size="2x" [styles]="{'stroke': '#686869', 'color': '#686869'}"></fa-icon></td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>56</td>
-                  <td>Kristansand</td>
+                      <button type="button" class="table-btn btn btn-sm btn-outline-primary" (click)="predict(pasient.id)">Kjør analyse</button>
+                      </td>
                   <td>
-                      <button type="button" class="table-btn btn btn-sm btn-outline-primary" (click)="viewTumorData(3)">Vis detaljer</button>
-                      <button type="button" class="table-btn btn btn-sm btn-outline-primary" (click)="predict(3)">Kjør analyse</button>
-                      <button type="button" class="table-btn btn btn-sm btn-outline-success" (click)="biopsi(3)">Hent biopsi</button>
+                      <button type="button" class="table-btn btn btn-sm btn-outline-success" (click)="biopsi(pasient.id)">Hent biopsi</button>
                   </td>
-                  <td><fa-icon icon="minus-circle" size="2x" [styles]="{'stroke': '#686869', 'color': '#686869'}"></fa-icon></td>
-                  <td><fa-icon icon="minus-circle" size="2x" [styles]="{'stroke': '#686869', 'color': '#686869'}"></fa-icon></td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>32</td>
-                  <td>Vennesla</td>
                   <td>
-                    <div class="button-group">
-                        <button type="button" class="table-btn btn btn-sm btn-outline-primary" (click)="viewTumorData(4)">Vis detaljer</button>
-                        <button type="button" class="table-btn btn btn-sm btn-outline-primary" (click)="predict(4)">Kjør analyse</button>
-                        <button type="button" class="table-btn btn btn-sm btn-outline-success" (click)="biopsi(4)">Hent biopsi</button>
-                    </div>
+                      <ng-template [ngIf]="pasient.aiMalignant === undefined" [ngIfElse]="aiMalignant">
+                          <fa-icon icon="minus-circle" size="2x" [styles]="{'stroke': '#686869', 'color': '#686869'}"></fa-icon>
+                      </ng-template>
+                      <ng-template #aiMalignant>
+                        <ng-template [ngIf]="pasient.aiMalignant" [ngIfElse]="aiBenignt">
+                            <fa-icon icon="exclamation-triangle" size="2x" [styles]="{'stroke': '#ff3300', 'color': '#ff3300'}"></fa-icon>
+                        </ng-template>
+                      </ng-template>
+                      <ng-template #aiBenignt>
+                          <fa-icon icon="check-circle" size="2x" [styles]="{'stroke': '#00cc66', 'color': '#00cc66'}"></fa-icon>
+                      </ng-template>
                   </td>
-                  <td><fa-icon icon="minus-circle" size="2x" [styles]="{'stroke': '#686869', 'color': '#686869'}"></fa-icon></td>
-                  <td><fa-icon icon="minus-circle" size="2x" [styles]="{'stroke': '#686869', 'color': '#686869'}"></fa-icon></td>
+                  <td>
+                      <ng-template [ngIf]="pasient.biopsiMalignant === undefined" [ngIfElse]="biopsiMalignant">
+                          <fa-icon icon="minus-circle" size="2x" [styles]="{'stroke': '#686869', 'color': '#686869'}"></fa-icon>
+                      </ng-template>
+                      <ng-template #biopsiMalignant>
+                        <ng-template [ngIf]="pasient.biopsiMalignant" [ngIfElse]="biopsiBenignt">
+                            <fa-icon icon="exclamation-triangle" size="2x" [styles]="{'stroke': '#ff3300', 'color': '#ff3300'}"></fa-icon>
+                        </ng-template>
+                      </ng-template>
+                      <ng-template #biopsiBenignt>
+                          <fa-icon icon="check-circle" size="2x" [styles]="{'stroke': '#00cc66', 'color': '#00cc66'}"></fa-icon>
+                      </ng-template>
+                  </td>
                 </tr>
-                <tr>
-                    <td>5</td>
-                    <td>61</td>
-                    <td>Tromsø</td>
-                    <td>
-                      <div class="button-group">
-                          <button type="button" class="table-btn btn btn-sm btn-outline-primary" (click)="viewTumorData(5)">Vis detaljer</button>
-                          <button type="button" class="table-btn btn btn-sm btn-outline-primary" (click)="predict(5)">Kjør analyse</button>
-                          <button type="button" class="table-btn btn btn-sm btn-outline-success" (click)="biopsi(5)">Hent biopsi</button>
-                      </div>
-                    </td>
-                    <td><fa-icon icon="minus-circle" size="2x" [styles]="{'stroke': '#686869', 'color': '#686869'}"></fa-icon></td>
-                    <td><fa-icon icon="minus-circle" size="2x" [styles]="{'stroke': '#686869', 'color': '#686869'}"></fa-icon></td>
-                  </tr>
               </tbody>
             </table>
           </div>

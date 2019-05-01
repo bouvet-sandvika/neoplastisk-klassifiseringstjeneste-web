@@ -19,44 +19,66 @@ export class AppComponent implements OnInit, AfterViewInit{
   }
 
   title = 'Onkologisk klassifiseringstjeneste';
-  predictionBenignant = false;
-  predictionMalignant = false;
-  biopsyBenignant = false;
-  biopsyMalignant = false;
+  pasients = [
+    { "id": 1,"alder": 43, "kommune": "Bergen", "aiMalignant": undefined, "biopsiMalignant": undefined },
+    { "id": 2,"alder": 67, "kommune": "Molde", "aiMalignant": undefined, "biopsiMalignant": undefined },
+    { "id": 3,"alder": 56, "kommune": "Ullensvang", "aiMalignant": undefined, "biopsiMalignant": undefined },
+    { "id": 4,"alder": 61, "kommune": "Bryne", "aiMalignant": undefined, "biopsiMalignant": undefined },
+    { "id": 5,"alder": 48, "kommune": "Oslo", "aiMalignant": undefined, "biopsiMalignant": undefined }
+  ]
 
   async predict(id) {
-    let body = {
-      id: 1, 
-      feature: {
-        mean_radius: 0.3
-      }
-    }
 
-    let response;
-    await fetch("http://localhost:4210/pasient", {
+    let pasientData;
+    await fetch("http://localhost:4211/ny-pasient?id=" + id,
+    {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*'
       },
-      method: 'POST',
-      body: JSON.stringify(body)
+      method: 'GET'
     })
     .then(res => res.json())
     .then(res => {
-      console.log(res)
-      response = res;
-      if(response.status === "OK") {
-        if(response.tumor_type === 'malignant') {
-          console.log("DANGER");
-        } else {
-          console.log("NOT DANGER");
-        }
+        pasientData = {
+          "id": id,
+          "data": res.tumorData
+        };
       }
-      
+    ).catch(function() {
+      console.log("Error from biopsi service");
     });
-
-    return response;
+    
+    if(pasientData !== undefined) {
+      await fetch("http://localhost:4210/pasient", {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        },
+        method: 'POST',
+        body: JSON.stringify(pasientData)
+      })
+      .then(res => res.json())
+      .then(res => {
+        if(res.status === "OK") {
+          this.pasients.forEach((pasient) => {
+            if(pasient.id === pasientData.id) {
+              if(res.tumor_type === 'malignant') {
+                pasient.aiMalignant = true;
+              } else if (res.tumor_type === 'benignt') {
+                pasient.aiMalignant = false;
+              }
+            }
+          });
+        }
+        
+      }).catch(function() {
+        console.log("Error from AI service");
+      });
+    }
+    
   }
 
   async biopsi(id) {
@@ -73,10 +95,19 @@ export class AppComponent implements OnInit, AfterViewInit{
     })
     .then(res => res.json())
     .then(res => {
-      console.log(res)
+      this.pasients.forEach((pasient) => {
+        if(pasient.id === id) {
+          if(res.result === 'benignt') {
+            pasient.biopsiMalignant = false;
+          } else if(res.result === 'malignant') {
+            pasient.biopsiMalignant = true;
+          }
+        }
+      });
       }
-    );
-
+    ).catch(function() {
+      console.log("Error from biopsi service");
+    });
     return response;
   }
 
