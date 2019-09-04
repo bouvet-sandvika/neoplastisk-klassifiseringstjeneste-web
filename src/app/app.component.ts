@@ -53,57 +53,6 @@ export class AppComponent implements OnInit, AfterViewInit{
         }
       });
     });
-
-    /*
-    let pasientData;
-    await fetch('http://localhost:4211/ny-pasient?id=' + id,
-    {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-      },
-      method: 'GET'
-    })
-    .then(res => res.json())
-    .then(res => {
-        pasientData = {
-          'id': id,
-          'data': res.tumorData
-        };
-      }
-    ).catch(() => {
-      console.log('Error from biopsi service');
-    });
-    if(pasientData !== undefined) {
-      await fetch('http://localhost:4210/pasient', {
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*'
-        },
-        method: 'POST',
-        body: JSON.stringify(pasientData)
-      })
-      .then(res => res.json())
-      .then(res => {
-        if(res.status === 'OK') {
-          this.pasients.forEach((pasient) => {
-            if(pasient.id === pasientData.id) {
-              if(res.tumor_type === 'malignant') {
-                pasient.aiMalignant = true;
-              } else if (res.tumor_type === 'benignt') {
-                pasient.aiMalignant = false;
-              }
-            }
-          });
-        }
-      }).catch(function() {
-        console.log('Error from AI service');
-      });
-    }
-
-     */
   }
 
   async biopsi(id) {
