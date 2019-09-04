@@ -8,6 +8,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { library } from '@fortawesome/fontawesome-svg-core'; 
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { ScoreComponent } from './score/score.component';
+import {HttpClientModule} from "@angular/common/http";
 
 library.add(fas);
 
@@ -20,7 +21,8 @@ library.add(fas);
     BrowserModule,
     AppRoutingModule,
     FontAwesomeModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
