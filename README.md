@@ -1,7 +1,7 @@
 
-# BreastCancerApp
+# Neoplastisk klassifiseringstjeneste
 
-## breast-tumor-classifier
+## Neoplastisk klassifiseringstjeneste
 Nevralt nettverk som identifiserer godartedet eller ondartede svulster i brystvev hos kvinner. 
 
 ## Development server
